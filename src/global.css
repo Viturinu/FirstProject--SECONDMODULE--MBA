@@ -1,0 +1,30 @@
+:root{
+    --white: #fff;
+    --gray-100: #e1e1e6;
+    --gray-300: #c4c4cc;
+    --gray-400: #8d8d99;
+    --gray-600: #323238;
+    --gray-700: #29292e;
+    --gray-800: #202024;
+    --gray-900: #121214;
+
+    --green-500: #00875f;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: var(--gray-900);
+    color: var(--gray-300);
+    -webkit-font-smoothing: antialiased; /*aplica em navegadores baseados no webkit, como chrome, brave, edge, etc, uma padronização para as fontes ficarem mais finas e detalhadas, principalmente com fontes que não são padrão do sistema*/
+}
+
+body,input,textarea,button{
+    font-family: "Roboto", sans-serif; /*se a Roboto não conseguir ser carregada, vai carregar uma fonte sem serifa do sistema*/
+    font-weight: 400; /*espessura da fonte*/
+    font-size: 1rem; /*rem pra melhorar acessibilidade - tamanho relativo - 1rem = 16px no padrão (usuário pode aumentar ou diminuir nas configs do browser)*/
+}
