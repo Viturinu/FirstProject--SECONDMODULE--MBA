@@ -1,4 +1,4 @@
-:root{
+:root {
     --white: #fff;
     --gray-100: #e1e1e6;
     --gray-300: #c4c4cc;
@@ -10,22 +10,36 @@
 
     --green-300: #00B37E;
     --green-500: #00875f;
+
+    --red-500: #F75A68;
 }
 
-*{
+:focus {
+    outline: transparent;
+    box-shadow: 0 0 0 2px var(--green-500);
+}
+
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     background: var(--gray-900);
     color: var(--gray-300);
-    -webkit-font-smoothing: antialiased; /*aplica em navegadores baseados no webkit, como chrome, brave, edge, etc, uma padronização para as fontes ficarem mais finas e detalhadas, principalmente com fontes que não são padrão do sistema*/
+    -webkit-font-smoothing: antialiased;
+    /*aplica em navegadores baseados no webkit, como chrome, brave, edge, etc, uma padronização para as fontes ficarem mais finas e detalhadas, principalmente com fontes que não são padrão do sistema*/
 }
 
-body,input,textarea,button{
-    font-family: "Roboto", sans-serif; /*se a Roboto não conseguir ser carregada, vai carregar uma fonte sem serifa do sistema*/
-    font-weight: 400; /*espessura da fonte*/
-    font-size: 1rem; /*rem pra melhorar acessibilidade - tamanho relativo - 1rem = 16px no padrão (usuário pode aumentar ou diminuir nas configs do browser)*/
+body,
+input,
+textarea,
+button {
+    font-family: "Roboto", sans-serif;
+    /*se a Roboto não conseguir ser carregada, vai carregar uma fonte sem serifa do sistema*/
+    font-weight: 400;
+    /*espessura da fonte*/
+    font-size: 1rem;
+    /*rem pra melhorar acessibilidade - tamanho relativo - 1rem = 16px no padrão (usuário pode aumentar ou diminuir nas configs do browser)*/
 }
