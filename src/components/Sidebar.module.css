@@ -59,13 +59,3 @@
     background: var(--green-500);
     color: var(--white);
 }
-
-.avatar{
-    box-sizing: initial; /*faz com que outline e border saiam dos limites, diferente do border-box que faz espremer de fora pra dentro*/
-    width: 3rem;
-    height: 3rem;
-    border-radius: 8px;
-    object-fit: cover;
-    border: 4px solid var(--gray-800);
-    outline: 2px solid var(--green-500);
-}
