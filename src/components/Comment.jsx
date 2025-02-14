@@ -5,7 +5,7 @@ import { ThumbsUp, Trash } from "@phosphor-icons/react";
 export function Comment() {
     return (
         <div className={styles.comment}>
-            <Avatar hasBorder={false} src="https://github.com/viturinu.png"/>
+            <Avatar hasBorder={false} src="https://github.com/viturinu.png" />
 
             <div className={styles.commentBox}>
                 <div className={styles.commentContent}>
@@ -19,7 +19,7 @@ export function Comment() {
                         </button>
                     </header>
 
-                    <p>Muito bom Devon, parabéns!! 👏👏</p>
+                    <p>Muito bom Dev, parabéns!! 👏👏</p>
                 </div>
 
                 <footer>
