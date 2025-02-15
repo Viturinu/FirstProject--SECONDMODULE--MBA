@@ -7,10 +7,7 @@ import { useState } from "react";
 
 export function Post({ author, publishedAt, content }) {
 
-    const [comments, setComments] = useState([
-        1,
-        2,
-    ]); //dentro da função Post. Attention!
+    const [comments, setComments] = useState(["Post muito bacana, hein?!"]); //dentro da função Post. Attention!
 
     // const publishedDateFormat = new Intl.DateTimeFormat('pt-BR', {
     //     day: '2-digit',
@@ -18,6 +15,8 @@ export function Post({ author, publishedAt, content }) {
     //     hour: '2-digit',
     //     minute: '2-digit',
     // }).format(publishedAt)
+
+    const [newCommentText, setNewCommentText] = useState("");
 
     const publishedDateFormat = format(publishedAt, "d 'de' LLLL 'às' HH:mm'h'", {
         locale: ptBR,
@@ -28,11 +27,38 @@ export function Post({ author, publishedAt, content }) {
         addSuffix: true
     })
 
-    function handleCreateNewComment(){
+    function handleCreateNewComment() {
         event.preventDefault();
-        setComments([...comments, comments.length+1]);
-        console.log(comments);
+
+        //const newCommentText = event.target.comment.value; //podemos acessar o valor de um item do target apenas pelo seu 'name' //Isso é programação imperativa (passo a passo), mas estamos tentando sempre via programação declarativa
+
+        setComments([...comments, newCommentText]);
+
+        //event.target.comment.value = "";
+
+        setNewCommentText(""); //isso é diferente porque estou setando o estado que está sendo usado lá no elemento textArea, no entanto eu não mudei via target nada lá. Isso é programação declarada, e não imperativa (ou seja, o que nós queremos)
     }
+
+    function handleNewCommentChange() {
+        // console.log(event.target); //aqui ele me retorna a textArea no target, pois foi lá que foi adicionado o evento com o atributo onChange
+        event.target.setCustomValidity(""); //Pois se o usuário digitar algo, essa função será chamada, logo tem que zerar o custumValidity, caso contrário, não deixará clicar, sempre dandoa quele alertar de campo vazio.
+        setNewCommentText(event.target.value);
+    }
+
+    function deleteComment(commentToDelete) {
+        const commentsWithoutDeletedOne = comments.filter((comment) => comment !== commentToDelete);
+        console.log(commentsWithoutDeletedOne)
+        setComments(commentsWithoutDeletedOne);
+
+        // alert("Testando se chamou");
+    }
+
+    function handleNewCommentInvalid() {
+        event.target.setCustomValidity("Este campo é obrigatório!"); //essa é a propriedade que tem seu display quando required não é atendido (fica dentro do target, que no caso é um TextArea)
+
+    }
+
+    const isNewCommentEmpty = newCommentText.length === 0;
 
     return (
         <article className={styles.post}>
@@ -53,9 +79,9 @@ export function Post({ author, publishedAt, content }) {
                 {
                     content.map(line => {
                         if (line.type === "paragraph") {
-                            return <p>{line.content}</p>;
+                            return <p key={line.content}>{line.content}</p>; /*key é sempre no primeiro elemento retornado de dentro do método map */
                         } else if (line.type === "link") {
-                            return <p><a href="#">{line.content}</a></p>
+                            return <p key={line.content}><a href="#">{line.content}</a></p>
                         }
                     })
                 }
@@ -63,16 +89,23 @@ export function Post({ author, publishedAt, content }) {
 
             <form onSubmit={handleCreateNewComment} className={styles.commentForm}>
                 <strong>Deixe seu feedback</strong>
-                <textarea placeholder="Deixe um comentário" />
+                <textarea
+                    name="comment"
+                    placeholder="Deixe um comentário"
+                    onChange={handleNewCommentChange}
+                    value={newCommentText}
+                    onInvalid={handleNewCommentInvalid}
+                    required
+                />
                 <footer>
-                    <button type="submit">Publicar</button>
+                    <button type="submit" disabled={isNewCommentEmpty}>Publicar</button>
                 </footer>
             </form>
 
             <div className={styles.commentList}>
                 {
                     comments.map(comment => {
-                        return <Comment/>
+                        return <Comment key={comment} content={comment} onDeleteComment={() => deleteComment(comment)} />
                     })
                 }
             </div>

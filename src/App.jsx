@@ -62,7 +62,10 @@ function App() {
             {
               posts.map(post => {
                 return (
-                  <Post
+                  <Post /*Each child in a list should have a unique "key" prop.
+
+                  Check the render method of `App`. => Isso significa que no metodo render de app, ou seja, no return que é onde se renderiza as coisas, tem uma lista que tem elementos sem a propriedade key exigida pelo React, pra facilitar a identificação de cada elemento post dessa lista de map */
+                    key={post.id}
                     author={post.author}
                     content={post.content}
                     publishedAt={post.publishedAt}
